@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:Tools="http://schemas.android.com/tools"
+    android:layout_marginHorizontal="@dimen/_4sdp"
+    android:layout_marginBottom="@dimen/_12sdp"
+    android:orientation="vertical"
+    app:cardCornerRadius="@dimen/_6sdp"
+    app:cardElevation="@dimen/_4sdp"
+    app:cardMaxElevation="@dimen/_4sdp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/_8sdp">
+
+        <TextView
+            android:id="@+id/tvCityName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            Tools:text="Sabzevar"
+            android:textSize="@dimen/_16ssp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvProvinceName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            Tools:text="Khorasan"
+            android:textSize="@dimen/_14ssp" />
+
+        <TextView
+            android:id="@+id/tvCountryName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            Tools:text="Iran" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

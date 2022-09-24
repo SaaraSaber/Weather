@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Weather</string>
+
+    <string name="cityName">Please enter the name city</string>
+    <string name="search">Search</string>
+    <string name="success">Success</string>
+    <string name="empty">Please Enter city name..</string>
+</resources>

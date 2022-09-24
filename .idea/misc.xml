@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Tamrin/Weather/app/src/main/res/drawable/bg_city_name_edite_text.xml" value="0.163" />
+        <entry key="..\:/Tamrin/Weather/app/src/main/res/drawable/bg_search_btn.xml" value="0.163" />
+        <entry key="..\:/Tamrin/Weather/app/src/main/res/drawable/ic_rain_percent.xml" value="0.159" />
+        <entry key="..\:/Tamrin/Weather/app/src/main/res/drawable/ic_wind_direction.xml" value="0.159" />
+        <entry key="..\:/Tamrin/Weather/app/src/main/res/layout/activity_main.xml" value="0.22864583333333333" />
+        <entry key="..\:/Tamrin/Weather/app/src/main/res/layout/fragment_cirty_finder.xml" value="0.264" />
+        <entry key="..\:/Tamrin/Weather/app/src/main/res/layout/fragment_city_finder.xml" value="0.22864583333333333" />
+        <entry key="..\:/Tamrin/Weather/app/src/main/res/layout/fragment_weather_detail.xml" value="0.264" />
+        <entry key="..\:/Tamrin/Weather/app/src/main/res/layout/reasult_search_city_finder.xml" value="0.264" />
+        <entry key="..\:/Tamrin/Weather/app/src/main/res/layout/show_loading_animation.xml" value="0.22864583333333333" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
