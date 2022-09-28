@@ -1,6 +1,6 @@
 package com.example.weather.data
 
-data class ModelRecCityName(
+data class RecCityNameModel(
 
     val Key: String,
     val LocalizedName: String,

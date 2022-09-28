@@ -1,9 +1,9 @@
 package com.example.weather.data
 
-data class ModelGetCurrentCondition(
+data class GetCurrentConditionModel(
     val LocalObservationDateTime: String,
     val WeatherText: String,
     val WeatherIcon:Int,
-    val Temperature:ModelCurrentTemperature,
-    val Wind: ModelCurrentWind
+    val Temperature:CurrentTemperatureModel,
+    val Wind: CurrentWindModel
 )

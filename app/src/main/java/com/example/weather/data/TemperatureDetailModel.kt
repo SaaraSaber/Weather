@@ -1,7 +1,9 @@
 package com.example.weather.data
 
-data class ModelTemperatureDetail(
+data class TemperatureDetailModel(
     val Value: Float,
+
     val Unit: String,
-    val UnitType: Int
+
+    val UnitType: Int,
 )

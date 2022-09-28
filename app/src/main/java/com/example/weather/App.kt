@@ -3,13 +3,12 @@ package com.example.weather
 import android.app.Application
 import android.content.SharedPreferences
 import com.example.weather.api.createApiServiceInstance
-import com.example.weather.repository.CityFinderRepository
-import com.example.weather.repository.CityFinderRepositoryImp
-import com.example.weather.repository.WeatherDetailRepository
-import com.example.weather.repository.WeatherDetailRepositoryImpl
+import com.example.weather.repository.*
 import com.example.weather.repository.dataSource.CityFinderRemoteDataSource
+import com.example.weather.repository.dataSource.OnDayForecastRemoteDataSource
 import com.example.weather.repository.dataSource.WeatherDetailLocalDataSource
 import com.example.weather.viewModel.CityFinderViewModel
+import com.example.weather.viewModel.OnDayForecastViewModel
 import com.example.weather.viewModel.WeatherDetailViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -29,8 +28,12 @@ class App : Application() {
                     WeatherDetailLocalDataSource(get(), get())
                 )
             }
+            factory<OnDayForecastRepository> {
+                OnDayForecastRepositoryImpl(OnDayForecastRemoteDataSource(get()))
+            }
             viewModel { CityFinderViewModel(get()) }
             viewModel { WeatherDetailViewModel(get()) }
+            viewModel { OnDayForecastViewModel(get()) }
         }
         startKoin {
             androidContext(this@App)
