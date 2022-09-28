@@ -7,12 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weather.R
-import com.example.weather.data.ModelRecCityName
+import com.example.weather.data.RecCityNameModel
 import com.example.weather.databinding.ReasultSearchCityFinderBinding
 
 class CityFinderAdapter : RecyclerView.Adapter<CityFinderAdapter.ViewHolder>() {
     var cityEventListener: CityEventListener? = null
-    var cityLists = ArrayList<ModelRecCityName>()
+    var cityLists = ArrayList<RecCityNameModel>()
         @SuppressLint("NotifyDataSetChanged")
         set(value) {
             field = value
@@ -22,13 +22,13 @@ class CityFinderAdapter : RecyclerView.Adapter<CityFinderAdapter.ViewHolder>() {
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val binding = ReasultSearchCityFinderBinding.bind(view)
 
-        fun bind(modelRecCityName: ModelRecCityName) {
-            binding.tvCityName.text = modelRecCityName.LocalizedName
-            binding.tvProvinceName.text = modelRecCityName.AdministrativeArea.LocalizedName
-            binding.tvCountryName.text = modelRecCityName.Country.LocalizedName
-            Log.i("TAG", "bind: " + modelRecCityName.LocalizedName)
+        fun bind(recCityNameModel: RecCityNameModel) {
+            binding.tvCityName.text = recCityNameModel.LocalizedName
+            binding.tvProvinceName.text = recCityNameModel.AdministrativeArea.LocalizedName
+            binding.tvCountryName.text = recCityNameModel.Country.LocalizedName
+            Log.i("TAG", "bind: " + recCityNameModel.LocalizedName)
             itemView.setOnClickListener {
-                cityEventListener?.onClickCityListener(modelRecCityName.Key)
+                cityEventListener?.onClickCityListener(recCityNameModel.Key)
             }
         }
     }

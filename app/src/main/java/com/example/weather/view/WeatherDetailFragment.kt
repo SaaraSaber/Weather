@@ -7,8 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.weather.CITY_ID
-import com.example.weather.data.ModelGetCurrentCondition
+import com.example.weather.data.GetCurrentConditionModel
+import com.example.weather.data.GetFutureDayForecastModel
 import com.example.weather.databinding.FragmentWeatherDetailBinding
+import com.example.weather.viewModel.OnDayForecastViewModel
 import com.example.weather.viewModel.WeatherDetailViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
@@ -17,9 +19,12 @@ import kotlin.collections.ArrayList
 
 class WeatherDetailFragment : Fragment() {
     private lateinit var binding: FragmentWeatherDetailBinding
-    private val viewModel: WeatherDetailViewModel by viewModel()
+    private val viewModelWeatherDetail: WeatherDetailViewModel by viewModel()
+    private val viewModelOnDayForecast: OnDayForecastViewModel by viewModel()
     private var cityId: String? = null
-    private lateinit var lsCurrentCondition: ArrayList<ModelGetCurrentCondition>
+    private lateinit var lsCurrentCondition: ArrayList<GetCurrentConditionModel>
+    private lateinit var lsOnDayForecast: ArrayList<GetFutureDayForecastModel>
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,17 +41,26 @@ class WeatherDetailFragment : Fragment() {
             findNavController().popBackStack()
         }
         cityId = requireArguments().getString(CITY_ID, "0")
-        viewModel.sendCurrentConditionApi(requireActivity(), cityId!!)
-        viewModel.liveData.observe(viewLifecycleOwner) {
-            if (it.isEmpty()) return@observe
-            lsCurrentCondition = ArrayList()
-            lsCurrentCondition.addAll(it)
-            setCurrentConditionData()
-        }
+        viewModelWeatherDetail.sendCurrentConditionApi(requireActivity(), cityId!!)
+        viewModelOnDayForecast.sendOnDayForecastApi(requireActivity(), cityId!!)
+        observerWeatherDetailApi()
+        observerOnDayForecastApi()
 
     }
 
+    private fun observerWeatherDetailApi() {
+        viewModelWeatherDetail.liveData.observe(viewLifecycleOwner) {
+            if (it.isEmpty()) return@observe
+            lsCurrentCondition = ArrayList()
+            lsCurrentCondition.addAll(it)
+
+            setCurrentConditionData()
+        }
+    }
+
     private lateinit var currentTemperatureIcon: String
+    private lateinit var currentDayMinMaxTemperature: String
+    private lateinit var currentRainPercent: String
 
     private fun setCurrentConditionData() {
         val tempModelGetCurrentCondition = lsCurrentCondition[0]
@@ -67,7 +81,6 @@ class WeatherDetailFragment : Fragment() {
         binding.tvCurrentWindDirection.text = tempModelGetCurrentCondition.Wind.Direction.Localized
         binding.imgWindDirection.rotation =
             tempModelGetCurrentCondition.Wind.Direction.Degrees.toFloat()
-
         getCurrentData()
     }
 
@@ -84,6 +97,15 @@ class WeatherDetailFragment : Fragment() {
         binding.tvCurrentTime.text =
             currentCompleteData.substring(indexOfSpace, currentCompleteData.length)
         binding.tvCurrentDate.text = "$currentYear/$currentMonth/$currentDay"
+    }
+
+    private fun observerOnDayForecastApi() {
+        viewModelOnDayForecast.liveData.observe(viewLifecycleOwner) {
+            binding.tvMinMaxTemperature.text=
+                "${it.DailyForecasts[0].Temperature.Minimum.Value}˚/ ${it.DailyForecasts[0].Temperature.Maximum.Value}˚"
+            binding.tvRainPercent.text = it.DailyForecasts[0].Day.precipitationProbability.toString()
+        }
+
     }
 
 }

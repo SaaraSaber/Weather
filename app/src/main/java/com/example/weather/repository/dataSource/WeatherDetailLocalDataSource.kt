@@ -3,7 +3,7 @@ package com.example.weather.repository.dataSource
 import android.content.SharedPreferences
 import com.example.weather.CITY_ID
 import com.example.weather.api.ApiService
-import com.example.weather.data.ModelGetCurrentCondition
+import com.example.weather.data.GetCurrentConditionModel
 import io.reactivex.rxjava3.core.Single
 
 class WeatherDetailLocalDataSource(
@@ -12,7 +12,7 @@ class WeatherDetailLocalDataSource(
 ) :
     WeatherDetailDataSource {
 
-    override fun getDetailWeather(cityId: String): Single<ArrayList<ModelGetCurrentCondition>> =
+    override fun getDetailWeather(cityId: String): Single<ArrayList<GetCurrentConditionModel>> =
         apiService.detailWeather(cityId)
 
     override fun saveWeather(cityId: String) {
