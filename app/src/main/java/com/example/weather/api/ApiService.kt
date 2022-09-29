@@ -3,6 +3,7 @@ package com.example.weather.api
 import com.example.weather.API_ID
 import com.example.weather.data.GetCurrentConditionModel
 import com.example.weather.data.GetFutureDayForecastModel
+import com.example.weather.data.GetTwelveHoursForecastModel
 import com.example.weather.data.RecCityNameModel
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
 import io.reactivex.rxjava3.core.Single
@@ -33,6 +34,14 @@ interface ApiService {
         @Query("details") details: Boolean = true,
         @Query("metric") metric: Boolean = true
     ): Single<GetFutureDayForecastModel>
+
+    @GET("forecasts/v1/hourly/12hour/{cityId}")
+    fun getTwelveHoursForecast(
+        @Path("cityId") cityId:String,
+        @Query("apikey") apikey: String = API_ID,
+        @Query("details") details: Boolean = true,
+        @Query("metric") metric: Boolean = true
+    ):Single<ArrayList<GetTwelveHoursForecastModel>>
 
 }
 
