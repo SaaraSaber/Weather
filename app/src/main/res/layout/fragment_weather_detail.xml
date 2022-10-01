@@ -30,8 +30,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
         android:layout_marginTop="59dp"
+        android:gravity="center"
         android:orientation="vertical">
 
         <ScrollView
@@ -51,8 +51,8 @@
                     android:id="@+id/tvMinMaxTemperature"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="15˚/31˚"
-                    android:textSize="@dimen/_14ssp" />
+                    android:textSize="@dimen/_14ssp"
+                    tools:text="15˚/31˚" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -91,8 +91,8 @@
                     android:id="@+id/tvCurrentDayConditionName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Clear"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    tools:text="Clear" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -116,7 +116,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginEnd="@dimen/_4sdp"
-                        android:text="12" />
+                        tools:text="12" />
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -183,21 +183,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="@dimen/_12sdp"
-                    android:text="Wed May 11,2022" />
+                    tools:text="Wed May 11,2022" />
 
                 <Button
                     android:id="@+id/btnChangeFragmentFiveDayForecast"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/black"
-                    android:text="5 day forecast" />
+                    android:text="@string/five_day_forecast" />
 
                 <Button
                     android:id="@+id/btnChangeFragmentRadar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/black"
-                    android:text="Radar" />
+                    android:text="@string/radar" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -205,7 +205,7 @@
                     android:layout_gravity="start"
                     android:layout_marginHorizontal="@dimen/_12sdp"
                     android:layout_marginVertical="@dimen/_8sdp"
-                    android:text="12 Hours Forecast"
+                    android:text="@string/twelve_hours_forecast"
                     android:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView

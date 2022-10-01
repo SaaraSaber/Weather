@@ -6,11 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.weather.CITY_ID
+import com.example.weather.adapter.TwelveHoursForecastAdapter
 import com.example.weather.data.GetCurrentConditionModel
 import com.example.weather.data.GetFutureDayForecastModel
+import com.example.weather.data.GetTwelveHoursForecastModel
 import com.example.weather.databinding.FragmentWeatherDetailBinding
 import com.example.weather.viewModel.OnDayForecastViewModel
+import com.example.weather.viewModel.TwelveHoursForecastViewModel
 import com.example.weather.viewModel.WeatherDetailViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
@@ -21,10 +26,11 @@ class WeatherDetailFragment : Fragment() {
     private lateinit var binding: FragmentWeatherDetailBinding
     private val viewModelWeatherDetail: WeatherDetailViewModel by viewModel()
     private val viewModelOnDayForecast: OnDayForecastViewModel by viewModel()
+    private val viewModelTwelveHoursForecast: TwelveHoursForecastViewModel by viewModel()
     private var cityId: String? = null
     private lateinit var lsCurrentCondition: ArrayList<GetCurrentConditionModel>
-    private lateinit var lsOnDayForecast: ArrayList<GetFutureDayForecastModel>
-
+    private lateinit var currentTemperatureIcon: String
+    private lateinit var adapter: TwelveHoursForecastAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,15 +43,18 @@ class WeatherDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding.backBtn.setOnClickListener {
             findNavController().popBackStack()
         }
         cityId = requireArguments().getString(CITY_ID, "0")
         viewModelWeatherDetail.sendCurrentConditionApi(requireActivity(), cityId!!)
         viewModelOnDayForecast.sendOnDayForecastApi(requireActivity(), cityId!!)
+        viewModelTwelveHoursForecast.sendTwelveHoursForecastApi(requireActivity(), cityId!!)
+
         observerWeatherDetailApi()
         observerOnDayForecastApi()
-
+        observerTwelveHoursForecastApi()
     }
 
     private fun observerWeatherDetailApi() {
@@ -57,10 +66,6 @@ class WeatherDetailFragment : Fragment() {
             setCurrentConditionData()
         }
     }
-
-    private lateinit var currentTemperatureIcon: String
-    private lateinit var currentDayMinMaxTemperature: String
-    private lateinit var currentRainPercent: String
 
     private fun setCurrentConditionData() {
         val tempModelGetCurrentCondition = lsCurrentCondition[0]
@@ -101,11 +106,27 @@ class WeatherDetailFragment : Fragment() {
 
     private fun observerOnDayForecastApi() {
         viewModelOnDayForecast.liveData.observe(viewLifecycleOwner) {
-            binding.tvMinMaxTemperature.text=
+            binding.tvMinMaxTemperature.text =
                 "${it.DailyForecasts[0].Temperature.Minimum.Value}˚/ ${it.DailyForecasts[0].Temperature.Maximum.Value}˚"
-            binding.tvRainPercent.text = it.DailyForecasts[0].Day.precipitationProbability.toString()
+            binding.tvRainPercent.text =
+                it.DailyForecasts[0].Day.precipitationProbability.toString()
         }
 
+    }
+
+    private fun observerTwelveHoursForecastApi() {
+        viewModelTwelveHoursForecast.liveData.observe(viewLifecycleOwner) {
+            adapter = TwelveHoursForecastAdapter(requireActivity())
+            adapter.lsTwelveHoursForecastViewModel = it
+            initRecTwelveHoursForecast()
+
+        }
+    }
+
+    private fun initRecTwelveHoursForecast() {
+        binding.recTwelveHoursForecast.layoutManager =
+            LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
+        binding.recTwelveHoursForecast.adapter = adapter
     }
 
 }

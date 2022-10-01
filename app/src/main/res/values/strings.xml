@@ -5,4 +5,7 @@
     <string name="search">Search</string>
     <string name="success">Success</string>
     <string name="empty">Please Enter city name..</string>
+    <string name="five_day_forecast">5 day forecast</string>
+    <string name="radar">Radar</string>
+    <string name="twelve_hours_forecast">12 Hours Forecast</string>
 </resources>
