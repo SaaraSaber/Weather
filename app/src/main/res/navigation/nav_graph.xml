@@ -19,5 +19,16 @@
         <action
             android:id="@+id/action_weatherDetailFragment_to_cityFinderFragment"
             app:destination="@id/cityFinderFragment" />
+        <action
+            android:id="@+id/action_weatherDetailFragment_to_fiveDayForecastFragment"
+            app:destination="@id/fiveDayForecastFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fiveDayForecastFragment"
+        android:name="com.example.weather.view.FiveDayForecastFragment"
+        android:label="FiveDayForecastFragment" >
+        <action
+            android:id="@+id/action_fiveDayForecastFragment_to_weatherDetailFragment"
+            app:destination="@id/weatherDetailFragment" />
     </fragment>
 </navigation>

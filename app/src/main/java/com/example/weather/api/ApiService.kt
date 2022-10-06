@@ -43,6 +43,14 @@ interface ApiService {
         @Query("metric") metric: Boolean = true
     ):Single<ArrayList<GetTwelveHoursForecastModel>>
 
+    @GET("forecasts/v1/daily/5day/{cityId}")
+    fun getFiveDayForecast(
+        @Path("cityId") cityId:String,
+        @Query("apikey") apikey: String = API_ID,
+        @Query("details") details: Boolean = true,
+        @Query("metric") metric: Boolean = true
+    ):Single<GetFutureDayForecastModel>
+
 }
 
 fun createApiServiceInstance(): ApiService {
