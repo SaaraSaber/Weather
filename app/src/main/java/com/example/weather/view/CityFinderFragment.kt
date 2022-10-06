@@ -51,6 +51,7 @@ class CityFinderFragment : Fragment(), CityFinderAdapter.CityEventListener {
                     adapter.cityEventListener = this
                 }
             }
+
         }
     }
 
@@ -67,6 +68,11 @@ class CityFinderFragment : Fragment(), CityFinderAdapter.CityEventListener {
             Navigation.findNavController(it)
                 .navigate(R.id.action_cityFinderFragment_to_weatherDetailFragment, bundle)
         }
+    }
+
+
+    override fun onSaveCityId(cityId: String) {
+        viewModel.saveCityId(cityId)
     }
 
 }

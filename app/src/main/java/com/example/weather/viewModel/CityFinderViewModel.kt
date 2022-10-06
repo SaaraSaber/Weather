@@ -41,6 +41,10 @@ class CityFinderViewModel(val repository: CityFinderRepository) : ViewModel() {
             })
     }
 
+    fun saveCityId(cityId:String){
+        repository.saveCityId(cityId)
+    }
+
     override fun onCleared() {
         compositeDisposable.clear()
         super.onCleared()

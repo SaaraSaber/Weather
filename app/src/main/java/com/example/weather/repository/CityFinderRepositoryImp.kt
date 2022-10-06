@@ -8,4 +8,8 @@ class CityFinderRepositoryImp(val remoteDataSource: CityFinderDataSource) : City
 
     override fun getCityName(cityName: String): Single<ArrayList<RecCityNameModel>> =
         remoteDataSource.getCityName(cityName)
+
+    override fun saveCityId(cityId: String) {
+        remoteDataSource.saveCityId(cityId)
+    }
 }

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.weather.R
 import com.example.weather.data.RecCityNameModel
 import com.example.weather.databinding.ReasultSearchCityFinderBinding
+import com.example.weather.viewModel.CityFinderViewModel
 
 class CityFinderAdapter : RecyclerView.Adapter<CityFinderAdapter.ViewHolder>() {
     var cityEventListener: CityEventListener? = null
@@ -28,6 +29,7 @@ class CityFinderAdapter : RecyclerView.Adapter<CityFinderAdapter.ViewHolder>() {
             binding.tvCountryName.text = recCityNameModel.Country.LocalizedName
             Log.i("TAG", "bind: " + recCityNameModel.LocalizedName)
             itemView.setOnClickListener {
+                cityEventListener?.onSaveCityId(recCityNameModel.Key)
                 cityEventListener?.onClickCityListener(recCityNameModel.Key)
             }
         }
@@ -48,5 +50,6 @@ class CityFinderAdapter : RecyclerView.Adapter<CityFinderAdapter.ViewHolder>() {
 
     interface CityEventListener {
         fun onClickCityListener(cityId: String)
+        fun onSaveCityId(cityId:String)
     }
 }
