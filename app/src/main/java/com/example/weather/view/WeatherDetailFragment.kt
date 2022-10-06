@@ -5,14 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.weather.CITY_ID
+import com.example.weather.R
 import com.example.weather.adapter.TwelveHoursForecastAdapter
 import com.example.weather.data.GetCurrentConditionModel
-import com.example.weather.data.GetFutureDayForecastModel
-import com.example.weather.data.GetTwelveHoursForecastModel
 import com.example.weather.databinding.FragmentWeatherDetailBinding
 import com.example.weather.viewModel.OnDayForecastViewModel
 import com.example.weather.viewModel.TwelveHoursForecastViewModel
@@ -46,6 +45,11 @@ class WeatherDetailFragment : Fragment() {
 
         binding.backBtn.setOnClickListener {
             findNavController().popBackStack()
+        }
+
+        binding.btnChangeFragmentFiveDayForecast.setOnClickListener {
+            Navigation.findNavController(it)
+                .navigate(R.id.action_weatherDetailFragment_to_fiveDayForecastFragment)
         }
         cityId = requireArguments().getString(CITY_ID, "0")
         viewModelWeatherDetail.sendCurrentConditionApi(requireActivity(), cityId!!)
