@@ -9,8 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.weather.R
 import com.example.weather.data.GetTwelveHoursForecastModel
 import com.example.weather.databinding.LayoutRecTwelveHoursForecastBinding
-import java.text.SimpleDateFormat
-import java.util.*
 import kotlin.collections.ArrayList
 
 class TwelveHoursForecastAdapter(private val context: Context) :
