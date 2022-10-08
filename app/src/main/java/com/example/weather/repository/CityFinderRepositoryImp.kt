@@ -12,4 +12,12 @@ class CityFinderRepositoryImp(val remoteDataSource: CityFinderDataSource) : City
     override fun saveCityId(cityId: String) {
         remoteDataSource.saveCityId(cityId)
     }
+
+    override fun readCityId(): String? =
+        remoteDataSource.readCityId()
+
+
+    override fun cleanCityId() {
+       remoteDataSource.cleanCityId()
+    }
 }

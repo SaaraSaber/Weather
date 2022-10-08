@@ -20,7 +20,7 @@ class CityFinderViewModel(val repository: CityFinderRepository) : ViewModel() {
     private lateinit var loading: ShowLoading
 
     fun cityFinder(context: Context, cityName: String) {
-        loading= ShowLoading(context)
+        loading = ShowLoading(context)
         repository.getCityName(cityName)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -41,8 +41,17 @@ class CityFinderViewModel(val repository: CityFinderRepository) : ViewModel() {
             })
     }
 
-    fun saveCityId(cityId:String){
+    fun saveCityIdFromSharedPreference(cityId: String) {
         repository.saveCityId(cityId)
+    }
+
+    val cityId: MutableLiveData<String> = MutableLiveData()
+    fun readCityIdFromSharedPreference() {
+        cityId.postValue(repository.readCityId())
+    }
+
+    fun cleanCityIdFromSharedPreference(){
+        repository.cleanCityId()
     }
 
     override fun onCleared() {

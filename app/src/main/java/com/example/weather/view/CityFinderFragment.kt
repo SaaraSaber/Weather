@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weather.CITY_ID
@@ -34,6 +35,8 @@ class CityFinderFragment : Fragment(), CityFinderAdapter.CityEventListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        SharedPreference()
+
         binding.searchBtn.setOnClickListener {
             if (binding.inputCityNameEd.text.isNullOrEmpty())
                 Toast.makeText(requireContext(), R.string.empty, Toast.LENGTH_SHORT)
@@ -41,7 +44,7 @@ class CityFinderFragment : Fragment(), CityFinderAdapter.CityEventListener {
             else {
                 initRecyclerView()
                 val cityName = binding.inputCityNameEd.text.toString().trim()
-                viewModel.cityFinder(requireActivity(),cityName)
+                viewModel.cityFinder(requireActivity(), cityName)
 
                 viewModel.liveData.observe(viewLifecycleOwner) {
 
@@ -51,6 +54,17 @@ class CityFinderFragment : Fragment(), CityFinderAdapter.CityEventListener {
                     adapter.cityEventListener = this
                 }
             }
+        }
+
+    }
+
+    private var cityId: String? = null
+    private fun SharedPreference() {
+        viewModel.readCityIdFromSharedPreference()
+        viewModel.cityId.observe(viewLifecycleOwner) {
+            if (it == "0")
+                return@observe
+            cityId = it
 
         }
     }
@@ -65,14 +79,14 @@ class CityFinderFragment : Fragment(), CityFinderAdapter.CityEventListener {
         view?.let {
             val bundle = Bundle()
             bundle.putString(CITY_ID, cityId)
-            Navigation.findNavController(it)
+            findNavController()
                 .navigate(R.id.action_cityFinderFragment_to_weatherDetailFragment, bundle)
         }
     }
 
 
     override fun onSaveCityId(cityId: String) {
-        viewModel.saveCityId(cityId)
+        viewModel.saveCityIdFromSharedPreference(cityId)
     }
 
 }

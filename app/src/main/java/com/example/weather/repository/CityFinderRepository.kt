@@ -7,4 +7,6 @@ interface CityFinderRepository {
 
     fun getCityName(cityName: String): Single<ArrayList<RecCityNameModel>>
     fun saveCityId(cityId:String)
+    fun readCityId():String?
+    fun cleanCityId()
 }

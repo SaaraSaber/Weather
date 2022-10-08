@@ -39,4 +39,44 @@ class CityFinderRemoteDataSource(
         edSharedPreferences.putString(CITY_ID, cityId)
         edSharedPreferences.apply()
     }
+
+    override fun readCityId(): String? {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            masterKeys = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
+            encryptedSharedPreferences = EncryptedSharedPreferences.create(
+                "Data",
+                masterKeys,
+                context,
+                EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+                EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+            )
+        } else {
+            encryptedSharedPreferences = context.getSharedPreferences(
+                "Data",
+                Context.MODE_PRIVATE
+            )
+        }
+        return encryptedSharedPreferences.getString(CITY_ID,"0")
+    }
+
+    override fun cleanCityId() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            masterKeys = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
+            encryptedSharedPreferences = EncryptedSharedPreferences.create(
+                "Data",
+                masterKeys,
+                context,
+                EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+                EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+            )
+        } else {
+            encryptedSharedPreferences = context.getSharedPreferences(
+                "Data",
+                Context.MODE_PRIVATE
+            )
+        }
+        val edSharedPreferences = encryptedSharedPreferences.edit()
+        edSharedPreferences.clear()
+        edSharedPreferences.apply()
+    }
 }
