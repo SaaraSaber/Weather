@@ -6,19 +6,10 @@ import com.example.weather.api.ApiService
 import com.example.weather.data.GetCurrentConditionModel
 import io.reactivex.rxjava3.core.Single
 
-class WeatherDetailLocalDataSource(
-    val sharedPreferences: SharedPreferences,
-    val apiService: ApiService
-) :
+class WeatherDetailLocalDataSource(val apiService: ApiService) :
     WeatherDetailDataSource {
 
     override fun getDetailWeather(cityId: String): Single<ArrayList<GetCurrentConditionModel>> =
         apiService.detailWeather(cityId)
 
-    override fun saveWeather(cityId: String) {
-        sharedPreferences.edit().apply {
-            putString(CITY_ID, cityId)
-        }
-            .apply()
-    }
 }

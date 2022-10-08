@@ -29,7 +29,7 @@ class App : Application() {
 
             factory<WeatherDetailRepository> {
                 WeatherDetailRepositoryImpl(
-                    WeatherDetailLocalDataSource(get(), get())
+                    WeatherDetailLocalDataSource(get())
                 )
             }
 

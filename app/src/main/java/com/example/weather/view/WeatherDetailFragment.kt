@@ -13,6 +13,7 @@ import com.example.weather.R
 import com.example.weather.adapter.TwelveHoursForecastAdapter
 import com.example.weather.data.GetCurrentConditionModel
 import com.example.weather.databinding.FragmentWeatherDetailBinding
+import com.example.weather.viewModel.CityFinderViewModel
 import com.example.weather.viewModel.OnDayForecastViewModel
 import com.example.weather.viewModel.TwelveHoursForecastViewModel
 import com.example.weather.viewModel.WeatherDetailViewModel
@@ -26,6 +27,7 @@ class WeatherDetailFragment : Fragment() {
     private val viewModelWeatherDetail: WeatherDetailViewModel by viewModel()
     private val viewModelOnDayForecast: OnDayForecastViewModel by viewModel()
     private val viewModelTwelveHoursForecast: TwelveHoursForecastViewModel by viewModel()
+    private val viewModelCityFinder: CityFinderViewModel by viewModel()
     private var cityId: String? = null
     private lateinit var lsCurrentCondition: ArrayList<GetCurrentConditionModel>
     private lateinit var currentTemperatureIcon: String
@@ -44,12 +46,17 @@ class WeatherDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.backBtn.setOnClickListener {
-            findNavController().popBackStack()
+            viewModelCityFinder.cleanCityIdFromSharedPreference()
+            findNavController().navigate(R.id.action_weatherDetailFragment_to_cityFinderFragment)
         }
 
         binding.btnChangeFragmentFiveDayForecast.setOnClickListener {
-            Navigation.findNavController(it)
-                .navigate(R.id.action_weatherDetailFragment_to_fiveDayForecastFragment)
+            view.let {
+                val bundle=Bundle()
+                bundle.putString(CITY_ID,cityId)
+               findNavController()
+                    .navigate(R.id.action_weatherDetailFragment_to_fiveDayForecastFragment,bundle)
+            }
         }
         cityId = requireArguments().getString(CITY_ID, "0")
         viewModelWeatherDetail.sendCurrentConditionApi(requireActivity(), cityId!!)
