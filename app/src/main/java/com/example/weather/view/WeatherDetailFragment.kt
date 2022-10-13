@@ -52,12 +52,16 @@ class WeatherDetailFragment : Fragment() {
 
         binding.btnChangeFragmentFiveDayForecast.setOnClickListener {
             view.let {
-                val bundle=Bundle()
-                bundle.putString(CITY_ID,cityId)
-               findNavController()
-                    .navigate(R.id.action_weatherDetailFragment_to_fiveDayForecastFragment,bundle)
+                val bundle = Bundle()
+                bundle.putString(CITY_ID, cityId)
+                findNavController()
+                    .navigate(R.id.action_weatherDetailFragment_to_fiveDayForecastFragment, bundle)
             }
         }
+        binding.btnChangeFragmentRadar.setOnClickListener {
+            findNavController().navigate(R.id.action_weatherDetailFragment_to_radarFragment)
+        }
+
         cityId = requireArguments().getString(CITY_ID, "0")
         viewModelWeatherDetail.sendCurrentConditionApi(requireActivity(), cityId!!)
         viewModelOnDayForecast.sendOnDayForecastApi(requireActivity(), cityId!!)
