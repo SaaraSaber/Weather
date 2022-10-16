@@ -63,8 +63,15 @@ class CityFinderFragment : Fragment(), CityFinderAdapter.CityEventListener {
         viewModel.cityId.observe(viewLifecycleOwner) {
             if (it == "0")
                 return@observe
-            cityId = it
-
+            else {
+                cityId = it
+                val bundle = Bundle()
+                bundle.putString(CITY_ID, cityId)
+                findNavController().navigate(
+                    R.id.action_cityFinderFragment_to_weatherDetailFragment,
+                    bundle
+                )
+            }
         }
     }
 
