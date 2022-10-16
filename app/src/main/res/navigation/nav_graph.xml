@@ -13,7 +13,7 @@
             app:destination="@id/weatherDetailFragment"
             app:launchSingleTop="true"
             app:popUpTo="@+id/nav_graph"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="true"/>
     </fragment>
     <fragment
         android:id="@+id/weatherDetailFragment"
@@ -21,7 +21,10 @@
         android:label="WeatherDetailFragment" >
         <action
             android:id="@+id/action_weatherDetailFragment_to_cityFinderFragment"
-            app:destination="@id/cityFinderFragment" />
+            app:destination="@id/cityFinderFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/nav_graph"
+            app:popUpToInclusive="true"/>
         <action
             android:id="@+id/action_weatherDetailFragment_to_fiveDayForecastFragment"
             app:destination="@id/fiveDayForecastFragment" />
