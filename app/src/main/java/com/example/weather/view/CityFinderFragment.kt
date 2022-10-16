@@ -34,8 +34,8 @@ class CityFinderFragment : Fragment(), CityFinderAdapter.CityEventListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        isNetworkAvailable()
         checkSharedPreferenceForCityId()
-
         binding.searchBtn.setOnClickListener {
             if (binding.inputCityNameEd.text.isNullOrEmpty())
                 Toast.makeText(requireContext(), R.string.empty, Toast.LENGTH_SHORT)
@@ -55,6 +55,11 @@ class CityFinderFragment : Fragment(), CityFinderAdapter.CityEventListener {
             }
         }
 
+    }
+
+    private fun isNetworkAvailable() {
+        if (viewModel.checkForInternet(requireActivity()) == false)
+            Toast.makeText(requireActivity(), "Please check your internet connection", Toast.LENGTH_SHORT).show()
     }
 
     private var cityId: String? = null
