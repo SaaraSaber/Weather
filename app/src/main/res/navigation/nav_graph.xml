@@ -10,7 +10,10 @@
         android:label="CityFinderFragment" >
         <action
             android:id="@+id/action_cityFinderFragment_to_weatherDetailFragment"
-            app:destination="@id/weatherDetailFragment" />
+            app:destination="@id/weatherDetailFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/nav_graph"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/weatherDetailFragment"

@@ -87,6 +87,7 @@ class CityFinderFragment : Fragment(), CityFinderAdapter.CityEventListener {
             bundle.putString(CITY_ID, cityId)
             findNavController()
                 .navigate(R.id.action_cityFinderFragment_to_weatherDetailFragment, bundle)
+
         }
     }
 
